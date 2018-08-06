@@ -7,7 +7,6 @@
           <img class="min-logo" src="../assets/motley-fool-premium-logo.png" alt="Motley Fool Premium">
         </div>
         <div class="search">
-          <i class="fas fa-search"></i>
           <searchBox
             v-model="searchQuery"
             :options="searchOptions"
@@ -64,11 +63,11 @@
             <div class="subcontents" :class="{active: internationalActive}">
               <ul>
                 <li><a href="https://www.fool.com/"><img src="https://g.foolcdn.com/Art/Flags/18/UnitedStates.png" class="flag" alt="Fool US">Fool - US</a></li>
-                <li><a href="https://www.fool.co.uk/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/UnitedKingdom.png" class="flag" alt="Fool US">Fool - United Kingdom</a></li>
-                <li><a href="https://www.fool.com.au/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Australia.png" class="flag" alt="Fool US">Fool - Australia</a></li>
-                <li><a href="https://www.fool.ca/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Canada.png" class="flag" alt="Fool US">Fool - Canada</a></li>
-                <li><a href="https://www.fool.sg/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Singapore.png" class="flag" alt="Fool US">Fool - Singapore</a></li>
-                <li><a href="https://www.fool.de/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Germany.png" class="flag" alt="Fool US">Fool - Germany</a></li>
+                <li><a href="https://www.fool.co.uk/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/UnitedKingdom.png" class="flag" alt="Fool UK">Fool - United Kingdom</a></li>
+                <li><a href="https://www.fool.com.au/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Australia.png" class="flag" alt="Fool AU">Fool - Australia</a></li>
+                <li><a href="https://www.fool.ca/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Canada.png" class="flag" alt="Fool CA">Fool - Canada</a></li>
+                <li><a href="https://www.fool.sg/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Singapore.png" class="flag" alt="Fool SG">Fool - Singapore</a></li>
+                <li><a href="https://www.fool.de/" target="_blank"><img src="https://g.foolcdn.com/Art/Flags/18/Germany.png" class="flag" alt="Fool DE">Fool - Germany</a></li>
               </ul>
             </div>
           </div>
@@ -137,7 +136,7 @@ export default {
     max-width: 1280px;
     color: #fff;
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
     min-height: 50px;
@@ -336,6 +335,10 @@ export default {
     margin-right: 20px;
   }
 
+  i {
+    margin-right: 1em;
+  }
+
   /* Flags for exchanges in serach suggestions */
 
   .exchFlag {
@@ -468,10 +471,6 @@ export default {
 
     .account-contents {
       right: auto;
-    }
-
-    i {
-      margin-right: 1em;
     }
   }
 

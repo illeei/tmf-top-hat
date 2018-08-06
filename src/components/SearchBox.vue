@@ -1,12 +1,14 @@
 <template>
   <div class="v-suggestions">
-    <input type="text" class="input" :class="extendedOptions.inputClass"
+    <i class="fas fa-search" id="desktopSearch" @click="searchSwitch"></i>
+    <input type="text" class="input" :class="[extendedOptions.inputClass, { expandSearch: expandSearch }]"
            v-bind="$attrs"
            v-on:keydown="onKeyDown"
            v-on:blur="hideItems"
            v-on:focus="showItems = true"
            v-model="query"
            :placeholder="extendedOptions.placeholder">
+    <i class="fas fa-search" id="mobileSearch" @click="searchSwitch"></i>
     <div class="suggestions">
       <ul class="items" v-show="items.length > 0 && showItems === true">
         <li class="item"
@@ -58,7 +60,9 @@
         lastSetQuery: null,
         items: [],
         activeItemIndex: -1,
-        showItems: false
+        showItems: false,
+        expandSearch: false,
+        // hideIcons: false
       }
     },
     beforeMount () {
@@ -80,12 +84,16 @@
       }
     },
     methods: {
+      searchSwitch () {
+        this.expandSearch = !this.expandSearch;
+        // this.hideIcons= !this.hideIcons;
+      },
       onItemSelectedDefault (item) {
         if (typeof item === 'string') {
           this.$emit('input', item)
           this.setInputQuery(item)
           this.showItems = false
-          // console.log('change value')
+
         }
       },
       hideItems () {
@@ -103,6 +111,7 @@
       onKeyDown (e) {
         switch (e.keyCode) {
           case 40:
+          console.log('down');
             this.highlightItem('down')
             e.preventDefault()
             break
@@ -193,6 +202,104 @@
 
 <style>
 .v-suggestions {
+  /* nested grid */
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 200px;
+  justify-items: center;
+  align-items: center;
+}
+
+.v-suggestions i {
+  margin-left: 1em;
+}
+
+.v-suggestions .suggestions {
+  position: absolute;
+  top: 40px;
+  height: auto;
+  z-index: 100;
+  background: #ffffff;
+}
+
+.v-suggestions .items {
+  list-style: none;
+  border: 1px solid #EEE;
+  margin: 0;
+  padding: 0;
+  border-width: 0 1px 1px 1px;
+}
+
+.v-suggestions .item {
+  border-bottom: 1px solid #eee;
+  padding: .2rem;
+  color: #000;
+  font-size: 13px;
+}
+
+.item:hover {
+  background-color: #FFCC33;
+}
+
+.input {
+  background-color: transparent;
+  /* border: 1px solid #fff;
+  border-radius: 10px; */
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  padding: 5px;
+  left: 10px;
+
+  /* padding-top: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 10px; */
+  width: 0;
+  /* min-height: 22px; */
+  /* display: none; */
+  transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+}
+
+.expandSearch {
+  width: 155px !important;
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+  /* border-radius: 10px; */
+  margin: 0;
+  z-index: 4;
+}
+
+.input:focus {
+  outline: none;
+}
+
+#desktopSearch {
+  display: none;
+}
+
+/* .hideIcons {
+  display: none;
+} */
+
+@media (min-width: 1000px) {
+   .input {
+     width: 155px;
+     background-color: transparent;
+     border-bottom: 1px solid #fff;
+     /* border-radius: 10px; */
+   }
+
+   #desktopSearch {
+     display: inline;
+     margin-right: 10px;
+   }
+
+   #mobileSearch {
+     display: none;
+   }
+}
+
+/* .v-suggestions {
   position: relative;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -257,5 +364,5 @@
   .v-suggestions {
     display: inline;
   }
-}
+} */
 </style>
